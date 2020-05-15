@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <!-- Load Posenet -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/posenet"></script>
+ </head>
+
+  <body>
+    <div><canvas id='cnv' width='640px' height='509px'/></div>
+    <div><img id='master' src="face.jpg"/></div>
+    <script>
+        var imageElement = document.getElementById('master');
+        posenet.load().then(function(net) {
+          const pose = net.estimateSinglePose(imageElement, {});
+          return pose;
+        }).then(function(pose){
+          console.log(pose);
+          drawPredictions(pose);    
+        })
+        
+        function drawPredictions(pose){
+            var canvas = document.getElementById('cnv');
+            var context = canvas.getContext('2d');
+            var img = new Image()
+            img.src="face.jpg"
+            img.onload = function(){
+                context.drawImage(img, 0, 0)
+                var centerX = canvas.width / 2;
+                var centerY = canvas.height / 2;
+                var radius = 2;
+
+
+                for(i=0; i<pose.keypoints.length; i++){
+                    if(pose.keypoints[i].score>0.1){
+                        part = pose.keypoints[i].part
+                        loc = pose.keypoints[i].position;
+                        context.beginPath();
+                        context.font = "18px Arial";
+                        context.fillStyle="white"
+                        context.fillText(part, loc.x, loc.y)
+                        context.arc(loc.x, loc.y, radius, 0, 2 * Math.PI, false);
+                        context.fillStyle = 'aqua';
+                        context.fill();
+                    }
+                } 
+            }
+        }
+    </script>
+  </body>
+</html>
