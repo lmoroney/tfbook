@@ -123,5 +123,3 @@ tfjs/translation_en_fr_v1/metadata.json
 tfjs/translation_en_fr_v1/model.json
 weights/posenet/mobilenet_v1_050/manifest.json
 weights/posenet/mobilenet_v1_075/manifest.json
-COPY TO CLIPBOARD	 SELECT ALL
-XPath Examples
