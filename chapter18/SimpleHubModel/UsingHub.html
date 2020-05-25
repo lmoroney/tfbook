@@ -1,0 +1,22 @@
+<html>
+<head>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"> </script>   
+</head>
+<body>
+    <img id="img" src="dog.jpg"/>
+</body>
+</html>
+<script>
+async function run(){
+    const img = document.getElementById('img');
+    model = await tf.loadGraphModel('https://tfhub.dev/google/tfjs-model/imagenet/mobilenet_v1_025_224/feature_vector/3/default/1', {fromTFHub: true});
+    var raw = tf.browser.fromPixels(img).toFloat();
+    var resized = tf.image.resizeBilinear(raw, [224, 224]);
+    var tensor = resized.expandDims(0);
+    var result = await model.predict(tensor).data();
+    console.log(result)
+}
+
+run();
+    
+</script>
