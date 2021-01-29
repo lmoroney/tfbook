@@ -23,6 +23,7 @@ android {
     aaptOptions {
         noCompress "tflite"
         noCompress "lite"
+        cruncherEnabled = false
     }
 }
 
