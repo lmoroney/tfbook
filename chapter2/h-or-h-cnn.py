@@ -12,7 +12,7 @@
 import urllib.request
 import zipfile
 
-training_url = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/horse-or-human.zip"
+training_url = "https://storage.googleapis.com/learning-datasets/horse-or-human.zip"
 training_file_name = "horse-or-human.zip"
 training_dir = 'horse-or-human/training/'
 urllib.request.urlretrieve(training_url, training_file_name)
@@ -21,7 +21,7 @@ zip_ref = zipfile.ZipFile(training_file_name, 'r')
 zip_ref.extractall(training_dir)
 zip_ref.close()
 
-validation_url = "https://storage.googleapis.com/laurencemoroney-blog.appspot.com/validation-horse-or-human.zip"
+validation_url = "https://storage.googleapis.com/learning-datasets/validation-horse-or-human.zip"
 validation_file_name = "validation-horse-or-human.zip"
 validation_dir = 'horse-or-human/validation/'
 urllib.request.urlretrieve(validation_url, validation_file_name)
